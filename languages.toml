@@ -1,0 +1,179 @@
+# Helix Languages Configuration
+# This file configures LSP servers and language-specific settings
+
+# Use tree-sitter for syntax highlighting
+use-grammars = { except = [] }
+
+# Python
+[[language]]
+name = "python"
+scope = "source.python"
+file-types = ["py", "pyi", "py3", "pyw", "pyx", "pxd", "pxi"]
+roots = ["pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git"]
+language-servers = ["ty", "ruff"]
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = "ruff", args = ["format", "-"] }
+auto-format = true
+
+[language-server.ty]
+command = "ty"
+args = ["server"]
+
+[language-server.ruff]
+command = "ruff"
+args = ["server", "--preview"]
+
+# Rust
+[[language]]
+name = "rust"
+scope = "source.rust"
+file-types = ["rs"]
+roots = ["Cargo.toml", "Cargo.lock"]
+language-servers = ["rust-analyzer"]
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.rust-analyzer.config]
+check = { command = "clippy" }
+diagnostics = { experimental = { enable = true } }
+hover = { actions = { enable = true } }
+typing = { autoClosingAngleBrackets = { enable = true } }
+cargo = { allFeatures = true }
+procMacro = { enable = true }
+
+# JavaScript / TypeScript
+[[language]]
+name = "javascript"
+scope = "source.js"
+file-types = ["js", "jsx", "mjs", "cjs"]
+roots = ["package.json", "tsconfig.json", ".git"]
+language-servers = ["typescript-language-server"]
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+scope = "source.ts"
+file-types = ["ts", "tsx"]
+roots = ["package.json", "tsconfig.json", ".git"]
+language-servers = ["typescript-language-server"]
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.typescript-language-server.config]
+documentFormatting = false
+
+# Go
+[[language]]
+name = "go"
+scope = "source.go"
+file-types = ["go"]
+roots = ["go.mod", "go.work", ".git"]
+language-servers = ["gopls"]
+indent = { tab-width = 4, unit = "\t" }
+auto-format = true
+formatter = { command = "goimports" }
+
+[language-server.gopls]
+command = "gopls"
+
+[language-server.gopls.config]
+gofumpt = true
+staticcheck = true
+
+# C/C++
+[[language]]
+name = "c"
+scope = "source.c"
+file-types = ["c", "h"]
+roots = ["compile_commands.json", ".git"]
+language-servers = ["clangd"]
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
+
+[[language]]
+name = "cpp"
+scope = "source.cpp"
+file-types = ["cpp", "cc", "cxx", "hpp", "hxx", "hh"]
+roots = ["compile_commands.json", ".git"]
+language-servers = ["clangd"]
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
+
+[language-server.clangd]
+command = "clangd"
+args = ["--background-index", "--clang-tidy", "--completion-style=detailed"]
+
+# Markdown
+[[language]]
+name = "markdown"
+scope = "source.md"
+file-types = ["md", "markdown"]
+language-servers = ["marksman"]
+indent = { tab-width = 2, unit = "  " }
+auto-format = false
+
+[language-server.marksman]
+command = "marksman"
+args = ["server"]
+
+# TOML
+[[language]]
+name = "toml"
+scope = "source.toml"
+file-types = ["toml"]
+language-servers = ["taplo"]
+indent = { tab-width = 2, unit = "  " }
+auto-format = true
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+# JSON
+[[language]]
+name = "json"
+scope = "source.json"
+file-types = ["json", "jsonc"]
+language-servers = ["vscode-json-language-server"]
+indent = { tab-width = 2, unit = "  " }
+auto-format = true
+
+[language-server.vscode-json-language-server]
+command = "vscode-json-language-server"
+args = ["--stdio"]
+
+# YAML
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = ["yml", "yaml"]
+language-servers = ["yaml-language-server"]
+indent = { tab-width = 2, unit = "  " }
+auto-format = true
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+# Bash
+[[language]]
+name = "bash"
+scope = "source.bash"
+file-types = ["sh", "bash", "zsh"]
+language-servers = ["bash-language-server"]
+indent = { tab-width = 2, unit = "  " }
+auto-format = false
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]

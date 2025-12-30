@@ -1,0 +1,185 @@
+theme = "gruvbox_transparent"
+
+[editor]
+auto-completion = true
+bufferline = "multiple"
+completion-trigger-len = 2
+line-number = "absolute"
+mouse = true
+cursorline = true
+color-modes = true
+# rulers = [80, 120]
+
+[editor.auto-save]
+focus-lost = true
+after-delay = { enable = true, timeout = 1000 }
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+other-lines = "error"
+
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
+
+[editor.soft-wrap]
+enable = true
+
+[editor.statusline]
+center = ["file-name"]
+left = ["mode", "spinner"]
+right = [
+    "diagnostics",
+    "selections",
+    "position",
+    "file-encoding",
+    "file-line-ending",
+    "file-type",
+]
+separator = "│"
+
+[editor.statusline.mode]
+insert = "INSERT"
+normal = "NORMAL"
+select = "SELECT"
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+newline = "none"
+
+[editor.whitespace.characters]
+tab = "→"
+tabpad = " "
+
+[editor.indent-guides]
+render = true
+character = "│"
+
+# Insert mode keymaps
+[keys.insert]
+esc = ["collapse_selection", "normal_mode"]
+j = { k = "normal_mode" } # jk to escape, similar to Neovim config
+
+# Normal mode keymaps
+[keys.normal]
+# File operations
+C-p = "file_picker"  # File picker like Neovim <C-p>
+C-s = "symbol_picker"  # LSP document symbols like Neovim <C-s>
+
+# Buffer navigation
+H = "goto_previous_buffer"  # Like Neovim <S-h>
+L = "goto_next_buffer"  # Like Neovim <S-l>
+
+# Line navigation (Vim-like)
+"0" = "goto_line_start"  # Go to start of line (like Neovim 0)
+"$" = "goto_line_end"  # Go to end of line (like Neovim $)
+
+# Documentation/Hover (Shift+K in Neovim)
+# Press K to show hover popup, use Ctrl+d/Ctrl+u to scroll within the popup
+# Note: Unlike Neovim, Helix cannot "focus" into the popup (feature not yet available)
+K = "hover"  # Show documentation (like Neovim Shift+K)
+
+# Increment/decrement
+"+" = "increment"  # Like Neovim +
+"-" = "decrement"  # Like Neovim -
+
+# Git operations (using g prefix like Neovim)
+[keys.normal.g]
+b = ":sh git blame -L %{cursor_line},+1 %{buffer_name}"  # Git blame current line
+d = "goto_definition"  # Go to definition (native Helix)
+r = "goto_reference"  # Go to references (native Helix)
+
+# Space is the leader key
+[keys.normal.space]
+# Quick save
+w = ":write"
+
+# Quit
+q = ":quit"
+Q = ":quit!"
+
+# Note: Search is cleared automatically in Helix when you press Escape or move
+# No need for a separate clear-search command like in Neovim
+
+# LSP operations
+[keys.normal.space.l]
+a = "code_action"  # Code actions
+d = "hover"  # Show diagnostics/documentation (like <leader>ld)
+f = ":format"  # Format code
+i = "goto_implementation"  # Go to implementation
+j = "goto_next_diag"  # Next diagnostic
+k = "goto_prev_diag"  # Previous diagnostic
+r = "rename_symbol"  # Rename symbol
+s = "symbol_picker"  # Document symbols
+S = "workspace_symbol_picker"  # Workspace symbols
+t = "goto_type_definition"  # Go to type definition
+R = "goto_reference"  # Go to references (mapped to <leader>lr in nvim)
+
+# File operations
+[keys.normal.space.f]
+f = "file_picker"  # Find files
+g = "file_picker_in_current_buffer_directory"  # Files in current directory
+b = "buffer_picker"  # Buffer picker
+
+# Search operations
+[keys.normal.space."/"]
+"/" = "global_search"  # Live grep equivalent
+
+# Git operations
+[keys.normal.space.g]
+g = ":sh ~/.config/helix/scripts/git_lazygit.sh"  # Open lazygit
+b = ":sh git blame %{buffer_name}"  # Git blame on current file
+d = ":sh git diff %{buffer_name}"  # Git diff on current file
+s = ":sh git status"  # Git status
+y = ":sh ~/.config/helix/scripts/github_permalink.sh %{buffer_name} %{selection_line_start} %{selection_line_end}"  # GitHub permalink
+
+# Buffer operations
+[keys.normal.space.b]
+b = "buffer_picker"  # Buffer picker
+d = ":buffer-close"  # Close buffer
+n = ":buffer-next"  # Next buffer
+p = ":buffer-previous"  # Previous buffer
+
+# Diagnostics
+[keys.normal.space.d]
+d = "diagnostics_picker"  # Show diagnostics
+f = "diagnostics_picker"  # File diagnostics
+w = "diagnostics_picker"  # Workspace diagnostics
+
+# Window/split operations
+[keys.normal.space.k]
+s = ":hsplit"  # Horizontal split
+v = ":vsplit"  # Vertical split
+
+# Options toggles
+[keys.normal.space.o]
+w = ":toggle soft-wrap.enable"  # Toggle wrap
+r = ":toggle line-number"  # Toggle relative numbers
+l = ":toggle cursorline"  # Toggle cursor line
+
+# Terminal (Helix doesn't have built-in terminal, but we can shell out)
+[keys.normal.space.T]
+f = ":sh"  # Open shell
+
+# Select mode keymaps (visual mode equivalent)
+[keys.select]
+# Line navigation (Vim-like)
+"0" = "goto_line_start"  # Go to start of line (like Neovim 0)
+"$" = "goto_line_end"  # Go to end of line (like Neovim $)
+
+# Maintain selection when indenting
+"<" = ["indent", "keep_selections"]
+">" = ["unindent", "keep_selections"]
+
+# GitHub permalink in visual/select mode
+[keys.select.space.g]
+y = ":sh ~/.config/helix/scripts/github_permalink.sh %{buffer_name} %{selection_line_start} %{selection_line_end}"  # GitHub permalink for selection
