@@ -9,7 +9,7 @@ mouse = true
 cursorline = true
 color-modes = true
 true-color = true
-rulers = [80, 120]  # Visual guides at 80 and 120 columns
+# rulers = [80, 120]  # Visual guides at 80 and 120 columns
 scrolloff = 8  # Keep 8 lines visible above/below cursor
 scroll-lines = 3  # Scroll 3 lines at a time
 completion-timeout = 100  # Faster completion popup
@@ -100,6 +100,7 @@ L = "goto_next_buffer"  # Like Neovim <S-l>
 # Line navigation (Vim-like)
 "0" = "goto_line_start"  # Go to start of line (like Neovim 0)
 "$" = "goto_line_end"  # Go to end of line (like Neovim $)
+G = "goto_file_end"  # Go to last line (like Neovim Shift+G)
 
 # Documentation/Hover (Shift+K in Neovim)
 # Press K to show hover popup, use Ctrl+d/Ctrl+u to scroll within the popup
@@ -212,6 +213,7 @@ f = ":sh"  # Open shell
 # Line navigation (Vim-like)
 "0" = "goto_line_start"  # Go to start of line (like Neovim 0)
 "$" = "goto_line_end"  # Go to end of line (like Neovim $)
+G = "goto_file_end"  # Go to last line (like Neovim Shift+G)
 
 # Maintain selection when indenting
 "<" = ["indent", "keep_selections"]
