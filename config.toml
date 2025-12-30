@@ -4,11 +4,15 @@ theme = "gruvbox_transparent"
 auto-completion = true
 bufferline = "multiple"
 completion-trigger-len = 2
-line-number = "absolute"
+line-number = "relative"  # Relative line numbers for easier navigation
 mouse = true
 cursorline = true
 color-modes = true
-# rulers = [80, 120]
+true-color = true
+rulers = [80, 120]  # Visual guides at 80 and 120 columns
+scrolloff = 8  # Keep 8 lines visible above/below cursor
+scroll-lines = 3  # Scroll 3 lines at a time
+completion-timeout = 100  # Faster completion popup
 
 [editor.auto-save]
 focus-lost = true
@@ -63,6 +67,19 @@ tabpad = " "
 [editor.indent-guides]
 render = true
 character = "│"
+skip-levels = 1  # Skip first indent level for cleaner look
+
+[editor.search]
+smart-case = true  # Case-insensitive unless uppercase used
+wrap-around = true  # Wrap search at end of file
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'<' = '>'
 
 # Insert mode keymaps
 [keys.insert]
@@ -74,6 +91,7 @@ j = { k = "normal_mode" } # jk to escape, similar to Neovim config
 # File operations
 C-p = "file_picker"  # File picker like Neovim <C-p>
 C-s = "symbol_picker"  # LSP document symbols like Neovim <C-s>
+C-e = ":config-open"  # Quick config access
 
 # Buffer navigation
 H = "goto_previous_buffer"  # Like Neovim <S-h>
@@ -98,6 +116,15 @@ b = ":sh git blame -L %{cursor_line},+1 %{buffer_name}"  # Git blame current lin
 d = "goto_definition"  # Go to definition (native Helix)
 r = "goto_reference"  # Go to references (native Helix)
 
+# View mode (sticky)
+[keys.normal.Z]
+z = "align_view_center"  # Center view
+t = "align_view_top"  # Align to top
+b = "align_view_bottom"  # Align to bottom
+m = "align_view_middle"  # Align to middle
+j = "scroll_down"  # Scroll down
+k = "scroll_up"  # Scroll up
+
 # Space is the leader key
 [keys.normal.space]
 # Quick save
@@ -106,6 +133,14 @@ w = ":write"
 # Quit
 q = ":quit"
 Q = ":quit!"
+
+# File explorer (new in Helix 25.07)
+e = "file_picker"  # File picker
+E = ":sh open ."  # Open current directory in Finder/file manager
+
+# Jump list navigation
+j = "jump_backward"  # Jump to previous location
+J = "jump_forward"  # Jump to next location
 
 # Note: Search is cleared automatically in Helix when you press Escape or move
 # No need for a separate clear-search command like in Neovim
@@ -165,6 +200,8 @@ v = ":vsplit"  # Vertical split
 w = ":toggle soft-wrap.enable"  # Toggle wrap
 r = ":toggle line-number"  # Toggle relative numbers
 l = ":toggle cursorline"  # Toggle cursor line
+d = ":toggle lsp.display-inlay-hints"  # Toggle inlay hints
+i = ":toggle indent-guides.render"  # Toggle indent guides
 
 # Terminal (Helix doesn't have built-in terminal, but we can shell out)
 [keys.normal.space.T]

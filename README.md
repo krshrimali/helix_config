@@ -11,6 +11,9 @@ This Helix configuration is inspired by and ported from my Neovim setup, providi
 - **Git Integration**: Lazygit, git blame, and other git operations
 - **Symbol Navigation**: LSP-powered symbol viewer and navigation
 - **Vim-like Navigation**: 0, $, K keybindings work like Vim/Neovim
+- **Productivity Features**: Relative line numbers, scrolloff, jump list, smart search, auto-pairs
+- **Multiple Cursors**: Native multiple cursor support with powerful text objects
+- **Surround**: Built-in surround functionality (add/change/delete surrounding characters)
 
 ## Directory Structure
 
@@ -23,6 +26,9 @@ This Helix configuration is inspired by and ported from my Neovim setup, providi
 ├── KEYBINDINGS.md       # Quick reference for keybindings
 ├── PYTHON_SETUP.md      # Python (ty + ruff) setup guide
 ├── LIMITATIONS.md       # Known limitations and workarounds
+├── GIT_INTEGRATION.md   # Complete git workflow guide
+├── PRODUCTIVITY.md      # Productivity tips and power features
+├── THEMES.md            # Theme customization guide
 ├── themes/              # Custom transparent themes
 │   ├── dracula_transparent.toml
 │   ├── gruvbox_transparent.toml (default)
