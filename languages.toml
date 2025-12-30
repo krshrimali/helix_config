@@ -11,7 +11,7 @@ scope = "source.python"
 file-types = ["py", "pyi", "py3", "pyw", "pyx", "pxd", "pxi"]
 roots = ["pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git"]
 language-servers = ["ty", "ruff"]
-indent = { tab-width = 4, unit = "    " }
+# indent = { tab-width = 4, unit = "    " }
 formatter = { command = "ruff", args = ["format", "-"] }
 auto-format = true
 
@@ -30,7 +30,7 @@ scope = "source.rust"
 file-types = ["rs"]
 roots = ["Cargo.toml", "Cargo.lock"]
 language-servers = ["rust-analyzer"]
-indent = { tab-width = 4, unit = "    " }
+# indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [language-server.rust-analyzer]
@@ -51,7 +51,7 @@ scope = "source.js"
 file-types = ["js", "jsx", "mjs", "cjs"]
 roots = ["package.json", "tsconfig.json", ".git"]
 language-servers = ["typescript-language-server"]
-indent = { tab-width = 2, unit = "  " }
+# indent = { tab-width = 2, unit = "  " }
 formatter = { command = "prettier", args = ["--parser", "typescript"] }
 auto-format = true
 
@@ -61,7 +61,7 @@ scope = "source.ts"
 file-types = ["ts", "tsx"]
 roots = ["package.json", "tsconfig.json", ".git"]
 language-servers = ["typescript-language-server"]
-indent = { tab-width = 2, unit = "  " }
+# indent = { tab-width = 2, unit = "  " }
 formatter = { command = "prettier", args = ["--parser", "typescript"] }
 auto-format = true
 
@@ -95,9 +95,9 @@ staticcheck = true
 name = "c"
 scope = "source.c"
 file-types = ["c", "h"]
-roots = ["compile_commands.json", ".git"]
+roots = ["compile_commands.json", ".git", "CMakeLists.txt"]
 language-servers = ["clangd"]
-indent = { tab-width = 4, unit = "    " }
+# indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [[language]]
@@ -158,7 +158,7 @@ name = "yaml"
 scope = "source.yaml"
 file-types = ["yml", "yaml"]
 language-servers = ["yaml-language-server"]
-indent = { tab-width = 2, unit = "  " }
+# indent = { tab-width = 2, unit = "  " }
 auto-format = true
 
 [language-server.yaml-language-server]
@@ -171,7 +171,7 @@ name = "bash"
 scope = "source.bash"
 file-types = ["sh", "bash", "zsh"]
 language-servers = ["bash-language-server"]
-indent = { tab-width = 2, unit = "  " }
+# indent = { tab-width = 2, unit = "  " }
 auto-format = false
 
 [language-server.bash-language-server]
