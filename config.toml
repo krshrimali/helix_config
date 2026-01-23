@@ -1,4 +1,4 @@
-theme = "gruvbox_transparent"
+theme = "acme_transparent"
 
 [editor]
 auto-completion = true
@@ -13,6 +13,10 @@ true-color = true
 scrolloff = 8  # Keep 8 lines visible above/below cursor
 scroll-lines = 3  # Scroll 3 lines at a time
 completion-timeout = 100  # Faster completion popup
+
+[editor.word-completion]
+enable = true
+trigger-length = 2
 
 [editor.auto-save]
 focus-lost = true
@@ -31,7 +35,7 @@ cursor-line = "warning"
 other-lines = "error"
 
 [editor.lsp]
-display-inlay-hints = true
+display-inlay-hints = false
 display-messages = true
 
 [editor.soft-wrap]
@@ -92,6 +96,7 @@ j = { k = "normal_mode" } # jk to escape, similar to Neovim config
 C-p = "file_picker"  # File picker like Neovim <C-p>
 C-s = "symbol_picker"  # LSP document symbols like Neovim <C-s>
 C-e = ":config-open"  # Quick config access
+"*" = ["move_prev_word_start", "move_next_word_end", "search_selection"]
 
 # Buffer navigation
 H = "goto_previous_buffer"  # Like Neovim <S-h>
@@ -136,8 +141,8 @@ q = ":quit"
 Q = ":quit!"
 
 # File explorer (new in Helix 25.07)
-e = "file_picker"  # File picker
-E = ":sh open ."  # Open current directory in Finder/file manager
+# e = "file_picker"  # File picker
+# E = ":sh open ."  # Open current directory in Finder/file manager
 
 # Jump list navigation
 j = "jump_backward"  # Jump to previous location
@@ -154,6 +159,9 @@ f = ":format"  # Format code
 i = "goto_implementation"  # Go to implementation
 j = "goto_next_diag"  # Next diagnostic
 k = "goto_prev_diag"  # Previous diagnostic
+o = "symbol_tree"  # Symbol tree/outline view (right split)
+O = "symbol_tree_hsplit"  # Symbol tree/outline view (bottom split)
+b = "breadcrumbs"  # Breadcrumbs picker (current symbol -> parent -> grandparent)
 r = "rename_symbol"  # Rename symbol
 s = "symbol_picker"  # Document symbols
 S = "workspace_symbol_picker"  # Workspace symbols
@@ -166,13 +174,19 @@ f = "file_picker"  # Find files
 g = "file_picker_in_current_buffer_directory"  # Files in current directory
 b = "buffer_picker"  # Buffer picker
 
-# Search operations
-[keys.normal.space."/"]
-"/" = "global_search"  # Live grep equivalent
+# Copy file path operations
+[keys.normal.space.c]
+r = ":sh ~/.config/helix/scripts/copy_relative_path.sh %{buffer_name}"  # Copy relative file path
+a = ":sh ~/.config/helix/scripts/copy_absolute_path.sh %{buffer_name}"  # Copy absolute file path
+i = ":sh ~/.config/helix/scripts/copy_import_path.sh %{buffer_name}"  # Copy Python import path
 
+# Search operations
+# [keys.normal.space]
+# "/" = "global_search"  # Live grep equivalent
+#
 # Git operations
 [keys.normal.space.g]
-g = ":sh ~/.config/helix/scripts/git_lazygit.sh"  # Open lazygit
+g = "lazygit"  # Open lazygit (native integration)
 b = ":sh git blame %{buffer_name}"  # Git blame on current file
 d = ":sh git diff %{buffer_name}"  # Git diff on current file
 s = ":sh git status"  # Git status
@@ -203,6 +217,7 @@ r = ":toggle line-number"  # Toggle relative numbers
 l = ":toggle cursorline"  # Toggle cursor line
 d = ":toggle lsp.display-inlay-hints"  # Toggle inlay hints
 i = ":toggle indent-guides.render"  # Toggle indent guides
+m = ":toggle lsp.display-messages"  # Toggle LSP diagnostics messages
 
 # Terminal (Helix doesn't have built-in terminal, but we can shell out)
 [keys.normal.space.T]
@@ -222,3 +237,7 @@ G = "goto_file_end"  # Go to last line (like Neovim Shift+G)
 # GitHub permalink in visual/select mode
 [keys.select.space.g]
 y = ":sh ~/.config/helix/scripts/github_permalink.sh %{buffer_name} %{selection_line_start} %{selection_line_end}"  # GitHub permalink for selection
+
+# Picker mode keymaps
+[picker_keys]
+"A-q" = "send_to_quickfix"  # Send filtered items to quickfix list

@@ -2,12 +2,11 @@
 # This file configures LSP servers and language-specific settings
 
 # Use tree-sitter for syntax highlighting
-use-grammars = { except = [] }
+# use-grammars = { except = [] }
 
 # Python
 [[language]]
 name = "python"
-scope = "source.python"
 file-types = ["py", "pyi", "py3", "pyw", "pyx", "pxd", "pxi"]
 roots = ["pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git"]
 language-servers = ["ty", "ruff"]
@@ -15,13 +14,22 @@ language-servers = ["ty", "ruff"]
 formatter = { command = "ruff", args = ["format", "-"] }
 auto-format = true
 
-[language-server.ty]
-command = "ty"
-args = ["server"]
-
 [language-server.ruff]
 command = "ruff"
 args = ["server", "--preview"]
+
+[language-server.ruff.config]
+line-length = 120
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "standard"
+
+# [language-server.ty]
+# command = "ty"
+# args = ["server"]
+
+[language-server.ty.environment]
+PYTHONPATH = "src/python"
 
 # Rust
 [[language]]
