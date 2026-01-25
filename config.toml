@@ -1,4 +1,4 @@
-theme = "acme_transparent"
+theme = "flexoki_light_transparent"
 
 [editor]
 auto-completion = true
@@ -58,6 +58,7 @@ separator = "│"
 insert = "INSERT"
 normal = "NORMAL"
 select = "SELECT"
+# terminal = "TERMINAL"
 
 [editor.whitespace.render]
 space = "none"
@@ -84,6 +85,16 @@ wrap-around = true  # Wrap search at end of file
 '"' = '"'
 '`' = '`'
 '<' = '>'
+
+# Embedded terminal configuration
+# [editor.embedded-terminal]
+# scrollback = 10000
+# close-on-exit = true
+# escape-key = "C-\\"  # Ctrl-\ to exit terminal mode
+#
+# [editor.embedded-terminal.claude]
+# command = "claude"
+# include-buffer = false
 
 # Insert mode keymaps
 [keys.insert]
@@ -219,9 +230,11 @@ d = ":toggle lsp.display-inlay-hints"  # Toggle inlay hints
 i = ":toggle indent-guides.render"  # Toggle indent guides
 m = ":toggle lsp.display-messages"  # Toggle LSP diagnostics messages
 
-# Terminal (Helix doesn't have built-in terminal, but we can shell out)
-[keys.normal.space.T]
-f = ":sh"  # Open shell
+# Terminal operations
+# [keys.normal.space.t]
+# t = ":terminal"  # Open terminal in horizontal split
+# v = ":terminal-vsplit"  # Open terminal in vertical split
+# c = ":claude"  # Open Claude CLI with context
 
 # Select mode keymaps (visual mode equivalent)
 [keys.select]
@@ -238,6 +251,22 @@ G = "goto_file_end"  # Go to last line (like Neovim Shift+G)
 [keys.select.space.g]
 y = ":sh ~/.config/helix/scripts/github_permalink.sh %{buffer_name} %{selection_line_start} %{selection_line_end}"  # GitHub permalink for selection
 
+# Terminal mode keymaps
+# [keys.terminal]
+# "C-\\" = "normal_mode"  # Exit terminal mode
+# pageup = "terminal_scroll_up"
+# pagedown = "terminal_scroll_down"
+#
+# [keys.terminal.C-w]
+# h = "jump_view_left"
+# j = "jump_view_down"
+# k = "jump_view_up"
+# l = "jump_view_right"
+# q = "close_terminal"
+#
 # Picker mode keymaps
 [picker_keys]
 "A-q" = "send_to_quickfix"  # Send filtered items to quickfix list
+
+[editor.quickfix]
+show-line-numbers = false
