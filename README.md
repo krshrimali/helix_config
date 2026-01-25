@@ -4,6 +4,7 @@ This Helix configuration is inspired by and ported from my Neovim setup, providi
 
 ## Features
 
+- **Automatic Theme**: Detects terminal dark/light mode and applies matching theme; toggle with `:theme-toggle`
 - **Transparent Themes**: Gruvbox transparent theme variants that show your terminal background
 - **LSP Integration**: Comprehensive LSP setup with ty + ruff for Python, and more
 - **Custom Keymaps**: Similar to Neovim configuration with `Space` as the leader key
@@ -121,6 +122,7 @@ This Helix configuration is inspired by and ported from my Neovim setup, providi
 - `Space o w` - Toggle soft wrap
 - `Space o r` - Toggle line numbers
 - `Space o l` - Toggle cursor line
+- `Space o t` - Toggle dark/light theme
 
 #### Quick Navigation
 
@@ -289,6 +291,30 @@ npm install -g bash-language-server
 4. **LSP Integration**: First-class LSP support out of the box
 
 ## Tips and Tricks
+
+### Automatic Theme (Dark/Light Mode)
+
+Helix detects your terminal's color preference (via [Mode 2031](https://github.com/contour-terminal/contour/blob/master/docs/vt-extensions/color-palette-update-notifications.md)) and automatically applies the matching theme.
+
+**Configuration** (`config.toml`):
+```toml
+[theme]
+dark = "flexoki_dark"
+light = "flexoki_light"
+# fallback = "flexoki_dark"  # Optional: used when terminal doesn't declare a preference
+```
+
+**Toggling themes**:
+- `:theme-toggle` or `:tt` - Toggle between dark and light themes
+- `Space o t` - Keybinding for quick toggle
+
+**How it works**:
+1. On startup, Helix queries the terminal for its theme preference
+2. If the terminal reports dark mode → loads the `dark` theme
+3. If the terminal reports light mode → loads the `light` theme
+4. If the terminal doesn't support theme detection → uses `fallback` (defaults to dark)
+
+**Supported terminals**: Most modern terminals support Mode 2031, including iTerm2, Kitty, Alacritty, WezTerm, and others. **Windows Terminal** does not currently support automatic detection, but `:theme-toggle` still works manually.
 
 ### Line Navigation (Vim-like)
 

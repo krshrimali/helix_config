@@ -1,4 +1,10 @@
-theme = "flexoki_light_transparent"
+# Automatic theme: detects terminal theme and uses appropriate dark/light theme
+# Use :theme-toggle (or :tt) to switch between dark and light themes
+[theme]
+dark = "flexoki_dark"
+light = "flexoki_light"
+fallback = "flexoki_light"  # Used when terminal doesn't declare a preference
+# theme = "flexoki_dark"
 
 [editor]
 auto-completion = true
@@ -186,7 +192,7 @@ g = "file_picker_in_current_buffer_directory"  # Files in current directory
 b = "buffer_picker"  # Buffer picker
 
 # Copy file path operations
-[keys.normal.space.c]
+[keys.normal.space.t]
 r = ":sh ~/.config/helix/scripts/copy_relative_path.sh %{buffer_name}"  # Copy relative file path
 a = ":sh ~/.config/helix/scripts/copy_absolute_path.sh %{buffer_name}"  # Copy absolute file path
 i = ":sh ~/.config/helix/scripts/copy_import_path.sh %{buffer_name}"  # Copy Python import path
@@ -229,6 +235,7 @@ l = ":toggle cursorline"  # Toggle cursor line
 d = ":toggle lsp.display-inlay-hints"  # Toggle inlay hints
 i = ":toggle indent-guides.render"  # Toggle indent guides
 m = ":toggle lsp.display-messages"  # Toggle LSP diagnostics messages
+t = ":theme-toggle"  # Toggle between dark/light theme
 
 # Terminal operations
 # [keys.normal.space.t]
