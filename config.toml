@@ -21,6 +21,7 @@ scrolloff = 8  # Keep 8 lines visible above/below cursor
 scroll-lines = 3  # Scroll 3 lines at a time
 completion-timeout = 100  # Faster completion popup
 show-diagnostics = false
+middle-click-hover = true
 
 [editor.word-completion]
 enable = true
