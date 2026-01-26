@@ -3,10 +3,11 @@
 [theme]
 dark = "flexoki_dark"
 light = "flexoki_light"
-fallback = "flexoki_light"  # Used when terminal doesn't declare a preference
+fallback = "flexoki_dark"  # Used when terminal doesn't declare a preference
 # theme = "flexoki_dark"
 
 [editor]
+# detect-system-theme = true
 auto-completion = true
 bufferline = "multiple"
 completion-trigger-len = 2
