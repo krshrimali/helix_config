@@ -19,6 +19,7 @@ true-color = true
 scrolloff = 8  # Keep 8 lines visible above/below cursor
 scroll-lines = 3  # Scroll 3 lines at a time
 completion-timeout = 100  # Faster completion popup
+show-diagnostics = false
 
 [editor.word-completion]
 enable = true
@@ -196,6 +197,8 @@ b = "buffer_picker"  # Buffer picker
 r = ":sh ~/.config/helix/scripts/copy_relative_path.sh %{buffer_name}"  # Copy relative file path
 a = ":sh ~/.config/helix/scripts/copy_absolute_path.sh %{buffer_name}"  # Copy absolute file path
 i = ":sh ~/.config/helix/scripts/copy_import_path.sh %{buffer_name}"  # Copy Python import path
+t = ":sh ~/.config/helix/scripts/copy_relative_path_with_lines.sh %{buffer_name} %{cursor_line} %{cursor_line}"  # Copy relative path with line number
+T = ":sh ~/.config/helix/scripts/copy_absolute_path_with_lines.sh %{buffer_name} %{cursor_line} %{cursor_line}"  # Copy absolute path with line number
 
 # Search operations
 # [keys.normal.space]
@@ -232,10 +235,11 @@ v = ":vsplit"  # Vertical split
 w = ":toggle soft-wrap.enable"  # Toggle wrap
 r = ":toggle line-number"  # Toggle relative numbers
 l = ":toggle cursorline"  # Toggle cursor line
-d = ":toggle lsp.display-inlay-hints"  # Toggle inlay hints
+D = ":toggle lsp.display-inlay-hints"  # Toggle inlay hints
 i = ":toggle indent-guides.render"  # Toggle indent guides
 m = ":toggle lsp.display-messages"  # Toggle LSP diagnostics messages
 t = ":theme-toggle"  # Toggle between dark/light theme
+d = ":toggle show-diagnostics"
 
 # Terminal operations
 # [keys.normal.space.t]
@@ -257,6 +261,11 @@ G = "goto_file_end"  # Go to last line (like Neovim Shift+G)
 # GitHub permalink in visual/select mode
 [keys.select.space.g]
 y = ":sh ~/.config/helix/scripts/github_permalink.sh %{buffer_name} %{selection_line_start} %{selection_line_end}"  # GitHub permalink for selection
+
+# Copy file path with line numbers in visual/select mode
+[keys.select.space.t]
+t = ":sh ~/.config/helix/scripts/copy_relative_path_with_lines.sh %{buffer_name} %{selection_line_start} %{selection_line_end}"  # Copy relative path with line range
+T = ":sh ~/.config/helix/scripts/copy_absolute_path_with_lines.sh %{buffer_name} %{selection_line_start} %{selection_line_end}"  # Copy absolute path with line range
 
 # Terminal mode keymaps
 # [keys.terminal]
