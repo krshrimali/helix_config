@@ -3,7 +3,7 @@
 [theme]
 dark = "flexoki_dark"
 light = "flexoki_light"
-fallback = "flexoki_dark"  # Used when terminal doesn't declare a preference
+fallback = "flexoki_light"  # Used when terminal doesn't declare a preference
 # theme = "flexoki_dark"
 
 [editor]
@@ -78,10 +78,10 @@ newline = "none"
 tab = "→"
 tabpad = " "
 
-[editor.indent-guides]
-render = true
-character = "│"
-skip-levels = 1  # Skip first indent level for cleaner look
+# [editor.indent-guides]
+# render = true
+# character = "│"
+# skip-levels = 1  # Skip first indent level for cleaner look
 
 [editor.search]
 smart-case = true  # Case-insensitive unless uppercase used
@@ -116,7 +116,9 @@ j = { k = "normal_mode" } # jk to escape, similar to Neovim config
 C-p = "file_picker"  # File picker like Neovim <C-p>
 C-s = "symbol_picker"  # LSP document symbols like Neovim <C-s>
 C-e = ":config-open"  # Quick config access
-"*" = ["move_prev_word_start", "move_next_word_end", "search_selection"]
+"*" = ["move_prev_word_start", "select_mode", "move_next_word_end", "search_selection", "search_next"]
+"#" = ["move_prev_word_start", "select_mode", "move_next_word_end", "search_selection", "search_prev"]
+X = ["extend_line_above", "extend_to_line_bounds"]
 
 # Buffer navigation
 H = "goto_previous_buffer"  # Like Neovim <S-h>
@@ -201,6 +203,8 @@ a = ":sh ~/.config/helix/scripts/copy_absolute_path.sh %{buffer_name}"  # Copy a
 i = ":sh ~/.config/helix/scripts/copy_import_path.sh %{buffer_name}"  # Copy Python import path
 t = ":sh ~/.config/helix/scripts/copy_relative_path_with_lines.sh %{buffer_name} %{cursor_line} %{cursor_line}"  # Copy relative path with line number
 T = ":sh ~/.config/helix/scripts/copy_absolute_path_with_lines.sh %{buffer_name} %{cursor_line} %{cursor_line}"  # Copy absolute path with line number
+f = ":sh ~/.config/helix/scripts/copy_filename.sh %{buffer_name}"  # Copy just the filename
+c = ":sh ~/.config/helix/scripts/copy_function_range.sh %{buffer_name} %{cursor_line}"  # Copy function path with range
 
 # Search operations
 # [keys.normal.space]
@@ -255,6 +259,7 @@ d = ":toggle show-diagnostics"
 "0" = "goto_line_start"  # Go to start of line (like Neovim 0)
 "$" = "goto_line_end"  # Go to end of line (like Neovim $)
 G = "goto_file_end"  # Go to last line (like Neovim Shift+G)
+X = ["extend_line_above", "extend_to_line_bounds"]
 
 # Maintain selection when indenting
 "<" = ["indent", "keep_selections"]
